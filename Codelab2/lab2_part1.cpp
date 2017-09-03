@@ -26,7 +26,7 @@ vector <int> CreateVector(int number){
 
 // Multiply the vector by a certain number. Since each memeber of the vector represents the digits of a number,
 // the result should be same as when a whole number is multiplied by another number.
-int multiply(vector <int> first_vector , int number){
+int Multiply(vector <int> first_vector , int number){
   int carry_over = 0;
   int result = 0;
   int product;
@@ -64,7 +64,7 @@ int main(){
   int result;
   int multiplier = 1;
   for (int i = second_vector.size()-1 ; i >=0 ; i--){
-    result = result + (multiply(first_vector , second_vector[i]) * multiplier);
+    result = result + (Multiply(first_vector , second_vector[i]) * multiplier);
     multiplier *= 10;
   }
   cout << endl;
