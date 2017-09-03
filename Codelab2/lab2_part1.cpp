@@ -7,6 +7,14 @@
 
 using namespace std;
 
+// Add user desired zeros at the end of a number.
+int ShiftLeft(int number , int shifts){
+  for (int i=0; i<shifts ; i++){
+    number = (number << 3) + (number << 1);
+  }
+  return number;
+}
+
 // Convert the integer into a vector where each member represent the digits of the number.
 vector <int> CreateVector(int number){
   int remainder;
@@ -30,7 +38,7 @@ int Multiply(vector <int> first_vector , int number){
   int carry_over = 0;
   int result = 0;
   int product;
-  int multiplier = 1;
+  int shifter = 0;
   for (int i = first_vector.size()-1 ; i >=0 ; i--){
     product = number * first_vector[i];
     product += carry_over;
@@ -43,14 +51,13 @@ int Multiply(vector <int> first_vector , int number){
     else{
       carry_over = 0;
     }
-    result = (product*multiplier) + result;
-    multiplier *= 10;
+    result = ShiftLeft(product , shifter) + result;
+    shifter += 1;
   }
   if (carry_over != 0){
-    result = (carry_over*multiplier)+result;
+    result = ShiftLeft(carry_over, shifter)+result;
   }
   return result;
-  
 }
 
 int main(){
@@ -62,10 +69,10 @@ int main(){
   vector <int> first_vector = CreateVector(first_number);
   vector <int> second_vector = CreateVector(second_number);
   int result;
-  int multiplier = 1;
+  int shifter = 0;
   for (int i = second_vector.size()-1 ; i >=0 ; i--){
-    result = result + (Multiply(first_vector , second_vector[i]) * multiplier);
-    multiplier *= 10;
+    result = result + ShiftLeft(Multiply(first_vector , second_vector[i]), shifter);
+    shifter += 1;
   }
   cout << endl;
   cout << "**** Using Naive Approach ****" << endl;
