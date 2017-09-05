@@ -39,9 +39,17 @@ vector <int> Addition (vector <int> small_vector , vector <int> big_vector){
     return big_vector;
   }
   int difference = big_vector.size() - small_vector.size();
+  if (difference < 0){
+    // Add 0 in front of big vector to make it equal size of big vector.
+    for (int i=difference ; i<0 ; i++){
+      big_vector.insert(big_vector.begin(),0);
+  }
+  }
+  else{
   // Add 0 in front of small vector to make it equal size of big vector.
   for (int i=0 ; i<difference ; i++){
     small_vector.insert(small_vector.begin(),0);
+  }
   }
   vector <int> sum;
   int carry_over = 0;
