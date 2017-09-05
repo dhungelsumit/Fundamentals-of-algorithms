@@ -1,5 +1,6 @@
 // Multiplication of two numbers using the naive approach.
 // Time Complexitiy: O(n^2)
+// TODO: Proper Comments and formatting according to style guide.
 #include <iostream>
 #include <string>
 #include <vector>
@@ -8,9 +9,9 @@
 using namespace std;
 
 // Add user desired zeros at the end of a number.
-int ShiftLeft(int number , int shifts){
+vector <int> ShiftLeft(vector <int> number , int shifts){
   for (int i=0; i<shifts ; i++){
-    number = (number << 3) + (number << 1);
+    number.push_back(0);
   }
   return number;
 }
@@ -32,13 +33,44 @@ vector <int> CreateVector(int number){
   return number_vector;
 }
 
-// Multiply the vector by a certain number. Since each memeber of the vector represents the digits of a number,
-// the result should be same as when a whole number is multiplied by another number.
-int Multiply(vector <int> first_vector , int number){
+// Adds two vector properly.
+vector <int> Addition (vector <int> small_vector , vector <int> big_vector){
+  if (small_vector.size() == 0){
+    return big_vector;
+  }
+  int difference = big_vector.size() - small_vector.size();
+  // Add 0 in front of small vector to make it equal size of big vector.
+  for (int i=0 ; i<difference ; i++){
+    small_vector.insert(small_vector.begin(),0);
+  }
+  vector <int> sum;
   int carry_over = 0;
-  int result = 0;
+  int temp_sum;
+  for (int i = big_vector.size()-1 ; i>=0 ; i--){
+    temp_sum = small_vector[i] + big_vector[i];
+    temp_sum += carry_over;
+    int remainder;
+    if (temp_sum > 9){
+      remainder = temp_sum % 10;
+      carry_over = temp_sum / 10;
+      temp_sum = remainder;
+    }
+    else{
+      carry_over = 0;
+    }
+    sum.insert(sum.begin() , temp_sum);
+    }
+    if (carry_over != 0){
+      sum.insert(sum.begin(), carry_over);
+    }
+  return sum;
+}
+
+// Helper function to assist with multiplication.
+vector <int> Multiply(vector <int> first_vector , int number){
+  int carry_over = 0;
+  vector <int> result;
   int product;
-  int shifter = 0;
   for (int i = first_vector.size()-1 ; i >=0 ; i--){
     product = number * first_vector[i];
     product += carry_over;
@@ -51,11 +83,23 @@ int Multiply(vector <int> first_vector , int number){
     else{
       carry_over = 0;
     }
-    result = ShiftLeft(product , shifter) + result;
-    shifter += 1;
+    result.insert(result.begin(),product);
   }
   if (carry_over != 0){
-    result = ShiftLeft(carry_over, shifter)+result;
+    result.insert(result.begin(), carry_over);
+  }
+  return result;
+}
+
+vector <int> MuliplyLargeNumbers(vector <int> first_vector , vector <int> second_vector){
+  int shifter = 0;
+  vector <int> result;
+  vector <int> temp;
+  cout << endl;
+  for (int i = second_vector.size()-1 ; i >=0 ; i--){
+    temp = ShiftLeft(Multiply(first_vector , second_vector[i]), shifter);
+    result = Addition(result , temp);
+    shifter += 1;
   }
   return result;
 }
@@ -68,23 +112,22 @@ int main(){
   cin >> second_number;
   vector <int> first_vector = CreateVector(first_number);
   vector <int> second_vector = CreateVector(second_number);
-  int result;
-  int shifter = 0;
-  for (int i = second_vector.size()-1 ; i >=0 ; i--){
-    result = result + ShiftLeft(Multiply(first_vector , second_vector[i]), shifter);
-    shifter += 1;
-  }
+  vector <int> result = MuliplyLargeNumbers (first_vector , second_vector);
   cout << endl;
   cout << "**** Using Naive Approach ****" << endl;
-  cout << "The product is " << result;
+  cout << "The product is ";
+  for (int i=0 ; i<result.size();i++){
+    cout << result[i];
+  }
   return 0;
 }
 
 /* Output: 
-Enter the first number:  99999
-Enter the second number:  99999
+Enter the first number:  98765
+Enter the second number:  56789
+
 
 **** Using Naive Approach ****
-The product is 1409865409 */
+The product is 5608765585    */
 
 
