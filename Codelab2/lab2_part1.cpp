@@ -66,6 +66,67 @@ vector <int> Addition (vector <int> small_vector , vector <int> big_vector){
   return sum;
 }
 
+// Subtract two vectors.
+vector <int> Subtract (vector <int> small_vector , vector <int> big_vector){
+  int difference = big_vector.size() - small_vector.size();
+  bool swap_needed = false;
+  // Add 0 in front of small vector to make it equal size of big vector.
+  if (difference < 0){
+     for (int i=difference ; i<0 ; i++){
+        big_vector.insert(big_vector.begin(),0);
+       
+     }
+        swap_needed = true;
+  }
+  else if (difference > 0){
+    for (int i=0 ; i<difference ; i++){
+      small_vector.insert(small_vector.begin(),0);
+  }
+      swap_needed = false;
+  }
+  else{
+    for (int i=0 ; i<big_vector.size();i++){
+      if (small_vector[i] < big_vector[i]){
+        swap_needed = false;
+        break;
+      }
+      else if (small_vector[i] > big_vector[i]){
+        swap_needed = true;
+        break;
+      }
+      else{
+        continue;
+      }
+    }
+  }
+  if (swap_needed){
+    small_vector.swap(big_vector);
+  }
+  vector <int> subtract;
+  int carry_over = 0;
+  int temp_sub;
+  for (int i = big_vector.size()-1 ; i>=0 ; i--){
+    temp_sub = big_vector[i] - small_vector[i];
+    temp_sub += carry_over;
+    if (temp_sub > 9){
+      carry_over = 1;
+      temp_sub -= 10;
+    }
+    else if (temp_sub <0){
+      carry_over = -1;
+      temp_sub += 10;
+    }
+    else{
+      carry_over = 0;
+    }
+    subtract.insert(subtract.begin() , temp_sub);
+    }
+    if (carry_over == 1){
+      subtract.insert(subtract.begin(), carry_over);
+    }
+  return subtract;
+}
+
 // Helper function to assist with multiplication.
 vector <int> Multiply(vector <int> first_vector , int number){
   int carry_over = 0;
