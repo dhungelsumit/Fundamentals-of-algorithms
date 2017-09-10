@@ -172,6 +172,14 @@ vector <int> MuliplyNumbers(vector <int> first_vector , vector <int> second_vect
   return result;
 }
 
+// Removes the leading 0 in a vector.
+vector <int> RemoveLeadingZero (vector <int> number){
+  while (number[0] == 0){
+    number.erase(number.begin());
+  }
+  return number;
+}
+
 vector <int> MultiplyLargeNumbers (vector <int> first_vector , vector <int> second_vector , int length){
   vector <int> first_left, first_right, second_left, second_right;
   int vector_size = first_vector.size();
@@ -199,7 +207,7 @@ vector <int> MultiplyLargeNumbers (vector <int> first_vector , vector <int> seco
   bd = MuliplyNumbers(first_right,second_right);
   result = Addition (left , middle);
   result = Addition(result , bd);
-  return result;
+  return RemoveLeadingZero(result);
 }
 
 int main(){
