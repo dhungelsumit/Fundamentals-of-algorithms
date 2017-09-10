@@ -1,5 +1,4 @@
-// Multiplication of two numbers using the naive approach.
-// Time Complexitiy: O(n^2)
+// Multiplication of two numbers using the Divide and Conquer Approach.
 // TODO: Proper Comments and formatting according to style guide.
 #include <iostream>
 #include <string>
@@ -160,6 +159,7 @@ vector <int> Multiply(vector <int> first_vector , int number){
   return result;
 }
 
+// Multiply two numbers represented by vectors.
 vector <int> MuliplyNumbers(vector <int> first_vector , vector <int> second_vector){
   int shifter = 0;
   vector <int> result;
@@ -180,6 +180,7 @@ vector <int> RemoveLeadingZero (vector <int> number){
   return number;
 }
 
+// Split the entered numbers into two halves and use the formula to find the muliplied product.
 vector <int> MultiplyLargeNumbers (vector <int> first_vector , vector <int> second_vector , int length){
   vector <int> first_left, first_right, second_left, second_right;
   int vector_size = first_vector.size();
