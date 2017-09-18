@@ -1,0 +1,17 @@
+Part 1: Creating a program to generate the below series
+
+For an input n, where n > 0, generate the following series,
+
+If n =1, return 1
+If n = 2, return 11
+If n = 3, return 21
+If n = 4, return 1211
+If n = 5, return 111221 
+If n = 6, return 312211
+If n = 7, return 13112221
+If n = 8, return 1113213211
+
+The pattern followed by this series should be pretty intuitive. As you can see, when n = 1, the return value is 1. Then you can read out the number loud i.e. 1 can be read as “one one” because there is only one 1. So the return value should be 11 for n = 2. Similarly, for n = 3, the program should return 21 because there are two ones in 11.   
+After that, see the above example to understand what you have to return for any given n. 
+
+You may notice that this will be a very costly program timewise because for any n > 1, you first have to start with n = 1 and n = 2 and so on (remember factorial and palindrome problems where you had to do something similar ?). 
