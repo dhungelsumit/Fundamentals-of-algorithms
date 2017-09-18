@@ -1,4 +1,4 @@
-// Program to generate look and say sequence
+// Program to generate look and say sequence and find nth element..
 // https://en.wikipedia.org/wiki/Look-and-say_sequence
 
 #include <iostream>
@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// Function to find nth element of the sequence.
 string LookAndSay(int n){
     if (n == 0) {
       return "";

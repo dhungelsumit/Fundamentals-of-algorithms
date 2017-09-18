@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// Function to find nth element of the look and say sequence.
 string LookAndSay(int n){
     if (n == 0) {
       return "";
