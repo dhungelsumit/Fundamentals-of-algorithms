@@ -110,9 +110,61 @@ int Precedence(char op){
     }
 }
 
+// Check if  a character is an operator
+bool IsOperator(char check){
+    if (check == '/' || check == '+' || check == '*' || check == '-'|| check == '^'){
+        return true;
+    }
+    return false;
+}
+
+// Perform operation on operands
+int PerformOperation(char operation, int operand1, int operand2) 
+{
+	switch(operation){
+        case '+':return operand1 + operand2;
+        case '-':return operand1 - operand2;
+	    case '*':return operand1 * operand2;
+	    case '/':return operand1 / operand2;
+        default:cout << "Unexpected Error \n";return -1;
+    }
+}
+
+// Calculate the value of the expression
+int CalculatPostfix(string postfix)
+{
+	ArrayStack stack;
+	for (int i = 0; i< postfix.length(); i++) 
+	{
+		if (postfix[i]== ' ' || postfix[i] == ',')
+		{
+			continue;
+		}
+		else if (IsOperator(postfix[i])) 
+		{
+			int second_operand = stack.Pop();
+			int first_operand = stack.Pop();
+			int value = PerformOperation(postfix[i], first_operand, second_operand);
+			stack.Push(value);
+		}
+		else if (isdigit(postfix[i])) 
+		{
+			int operand = 0;
+			while (i<postfix.length() && isdigit(postfix[i])) 
+			{
+				operand = (operand * 10) + (postfix[i] - '0');
+				i++;
+			}
+			i--;
+			stack.Push(operand);
+		}
+	}
+	return stack.Top();
+}
+
 // Convert infix expression to postifix expression
 string PostFix(string infix){
-    string postfix;
+    string postfix="";
     ArrayStack stack;
     for (int i=0; i<infix.length(); i++){
         // If ( , push it to stack
@@ -159,30 +211,30 @@ string PostFix(string infix){
 }
 
 void PostFixTests(){
-    string input;
+    string input1 ="" , input2="", input3="";
     cout << "\n****** Postfix Notation ******\n";
     cout << "\nTEST 1\n";    
-    input = "1+2";
+    input1 = "1+2";
     cout << endl;
-    cout << "Input : " << input << endl;
+    cout << "Input : " << input1 << endl;
     cout << "Expected : " <<  "1 2+" << endl;
-    cout << "Output : " << PostFix(input) << endl;
+    cout << "Output : " << PostFix(input1) << " , " << CalculatPostfix(PostFix(input1)) << endl;
     cout << "\nTEST 2\n";    
-    input = "a+b*(c^d-e)^(f+g*h)-i";
+    input2 = "a+b*(c^d-e)^(f+g*h)-i";
     cout << endl;
-    cout << "Input : " << input << endl;
+    cout << "Input : " << input2 << endl;
     cout << "Expected : " <<  "abcd^e-fgh*+^*+i-" << endl;
-    cout << "Output : " << PostFix(input) << endl;
+    cout << "Output : " << PostFix(input2) << endl;
     cout << "\nTEST 2\n";    
-    input = "5+((1+2)*4)-3";
+    input3 = "5+((1+2)*4)-3";
     cout << endl;
-    cout << "Input : " << input << endl;    
+    cout << "Input : " << input3 << endl;    
     cout << "Expected : " <<  "5 1 2 + 4 * + 3 -" << endl;
-    cout << "Output : " << PostFix(input) << endl;
+    cout << "Output : " << PostFix(input3) << " , " << CalculatPostfix(PostFix(input3)) <<endl;
 
 }
 
 int main(){
-    PostFixTests();
+    PostFixTests();    
     return 0;
 }
