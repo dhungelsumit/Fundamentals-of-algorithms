@@ -96,7 +96,7 @@ public:
 };
 
 // Check if the entered string is palindrome
-bool isPalindrome(string input){
+bool IsPalindrome(string input){
     int string_length;    
     string_length = input.length();
     ArrayStack  stack;
@@ -117,11 +117,59 @@ bool isPalindrome(string input){
 return true;
 }
 
+void PalindromeTests(){
+    string input;
+    bool result;
+    cout << "\n***** Palindrome Tests ******" << endl;
+    cout << "\nTEST 1\n";
+    input = "madam";
+    cout << "Input : " << input << endl;
+    cout << "Expected : " << "Is Palindrome" << endl;
+    result = IsPalindrome (input);
+    if (result){
+        cout << "It is palindrome" << endl;
+    } else {
+        cout << "It is not palindrome" << endl;
+    }
+    cout << "\nTEST 2\n";
+    input = "Madam, I'm Adam";
+    cout << "Input : " << input << endl;
+    cout << "Expected : " << "Is Palindrome" << endl;
+    result = IsPalindrome (input);
+    if (result){
+        cout << "It is palindrome" << endl;
+    } else {
+        cout << "It is not palindrome" << endl;
+    }
+    cout << "\nTEST 3\n";
+    input = "A man, a plan, a canal: Panama";
+    cout << "Input : " << input << endl;
+    cout << "Expected : " << "Is Palindrome" << endl;
+    result = IsPalindrome (input);
+    if (result){
+        cout << "It is palindrome" << endl;
+    } else {
+        cout << "It is not palindrome" << endl;
+    }
+    cout << "\nTEST 4\n";
+    input = "NotPalindrome";
+    cout << "Input : " << input << endl;
+    cout << "Expected : " << "Is not Palindrome" << endl;
+    result = IsPalindrome (input);
+    if (result){
+        cout << "It is palindrome" << endl;
+    } else {
+        cout << "It is not palindrome" << endl;
+    }
+    cout << "******************************\n" << endl;
+}
+
 int main(){
     string input;
-    cout << "Enter a word : ";
+    PalindromeTests();
+    cout << "Enter your own test string : ";
     cin >> input;
-    bool result = isPalindrome (input);
+    bool result = IsPalindrome (input);
     if (result){
         cout << "It is palindrome" << endl;
     } else {
