@@ -27,6 +27,7 @@ int main(){
     int target = 9;
     int numbers[5] = {2,11,7,5,4};
     vector<vector<int> > combination = Combination(numbers , target);
+    cout << "Array = [2,11,7,5,4]" << endl;
     for (int i = 0; i<combination.size(); i++){
         cout << combination[i][0] << " , " << combination[i][1] <<endl;
 
