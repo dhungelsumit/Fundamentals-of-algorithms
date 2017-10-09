@@ -1,5 +1,4 @@
 // Given the column number of Excel spreadsheet, return the equivalent index 
-
 #include <iostream>
 #include <string>
 
