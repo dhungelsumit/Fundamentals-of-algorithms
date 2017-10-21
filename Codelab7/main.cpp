@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -60,11 +61,26 @@ void BFS_tree(Node* root){
         }
     }
 
+void helper(Node* root, vector<int> path)
+    {
+        if( root == NULL) return; 
+        if (root->left == NULL && root->right == NULL){
+            for (int i=0; i<path.size(); i++) {
+                cout<<path.at(i) << " ";
+            }
+            cout << root->data << endl;
+            return;
+        }
+        path.push_back(root->data);
+        helper(root->left, path);
+        helper(root->right, path);
+ }
+
 void all_root_to_leaves(Node* root){
-
-
-
+    vector<int> path;
+    helper(root, path);
 }
+
 //This is extra credit. Only turn it in after completing other questions
 void sumPath(Node* root, int k){
     
@@ -89,7 +105,8 @@ int main(){
     cout << endl;   
     cout << "Levelorder: ";
     BFS_tree(root);
-    cout << endl;           
-//    all_root_to_leaves(root);
+    cout << endl;       
+    cout << "Root to leaves path: " << endl;
+    all_root_to_leaves(root);
 //    sumPath(root, 11);
 }
