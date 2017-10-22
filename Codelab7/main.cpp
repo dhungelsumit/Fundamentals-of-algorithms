@@ -61,7 +61,7 @@ void BFS_tree(Node* root){
         }
     }
 
-void helper(Node* root, vector<int> path)
+void AllRootHelper(Node* root, vector<int> path)
     {
         if( root == NULL) return; 
         if (root->left == NULL && root->right == NULL){
@@ -72,18 +72,43 @@ void helper(Node* root, vector<int> path)
             return;
         }
         path.push_back(root->data);
-        helper(root->left, path);
-        helper(root->right, path);
+        AllRootHelper(root->left, path);
+        AllRootHelper(root->right, path);
  }
 
 void all_root_to_leaves(Node* root){
     vector<int> path;
-    helper(root, path);
+    AllRootHelper(root, path);
+}
+
+void SumHelper(Node* root, vector<int> path, int k){
+    if( root == NULL) return; 
+    vector<int> sum;
+    if (root->left == NULL && root->right == NULL){
+        for (int i=0; i<path.size(); i++) {
+            sum.push_back(path.at(i));
+        }
+        sum.push_back(root->data);
+        int total = 0;
+        for (int i=0; i < sum.size(); i++){
+            total+=sum.at(i);
+        }
+        if (total == k){
+            for (int i=0; i < sum.size(); i++){
+                cout<<sum.at(i) << " ";
+            }
+        }
+        return;
+    }
+    path.push_back(root->data);
+    SumHelper(root->left, path, k);
+    SumHelper(root->right, path, k);
 }
 
 //This is extra credit. Only turn it in after completing other questions
 void sumPath(Node* root, int k){
-    
+    vector<int> path;
+    SumHelper(root, path, k);
 }
 
 int main(){
@@ -108,5 +133,7 @@ int main(){
     cout << endl;       
     cout << "Root to leaves path: " << endl;
     all_root_to_leaves(root);
-//    sumPath(root, 11);
+    cout << "Sum equalling to 11: " << endl;
+    sumPath(root, 11);
+    cout << endl;
 }
