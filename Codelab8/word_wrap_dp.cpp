@@ -5,8 +5,8 @@
  */
 
 #include <fstream>
-#include <math.h>
 #include <iostream>
+#include <math.h>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -14,7 +14,7 @@
 using namespace std;
 
 /* Split a  sentence into vectors containing different strings. */ 
-vector<string> split(string sentence, string delimiter){
+vector<string> Split(string sentence, string delimiter){
     vector<string> list;
     size_t pos = 0;
     string token;
@@ -48,7 +48,7 @@ vector<string> AllWords(int max_length){
         getline(inFile, temp_sentence);
         counter++;
         // Splitting a line into various words.
-        vector <string> word_list = split(temp_sentence, " ");
+        vector <string> word_list = Split(temp_sentence, " ");
         for(int i = 0; i < word_list.size(); i++){
             temp_word = word_list[i];
             word_len = temp_word.length();
