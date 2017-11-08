@@ -18,31 +18,31 @@ struct Node* newNode(int data){
     return node;
 };
 
-void inorder(Node* root){
+void InOrder(Node* root){
     if (root) {
-        inorder(root->left);
+        InOrder(root->left);
         cout << root->data << " ";
-        inorder(root->right);
+        InOrder(root->right);
      }
 }
 
-void preorder(Node* root){
+void PreOrder(Node* root){
     if (root) {
         cout << root->data << " ";
-        preorder(root->left);
-        preorder(root->right);
+        PreOrder(root->left);
+        PreOrder(root->right);
      }
 }
 
-void postorder(Node* root){
+void PostOrder(Node* root){
     if (root) {
-        postorder(root->left);
-        postorder(root->right);
+        PostOrder(root->left);
+        PostOrder(root->right);
         cout << root->data << " ";        
      }
 }
 
-void BFS_tree(Node* root){
+void BfsTree(Node* root){
     queue<Node*> bfs;
         if (root) {
             bfs.push(root);
@@ -76,7 +76,7 @@ void AllRootHelper(Node* root, vector<int> path)
         AllRootHelper(root->right, path);
  }
 
-void all_root_to_leaves(Node* root){
+void AllRootToLeaves(Node* root){
     vector<int> path;
     AllRootHelper(root, path);
 }
@@ -106,7 +106,7 @@ void SumHelper(Node* root, vector<int> path, int k){
 }
 
 //This is extra credit. Only turn it in after completing other questions
-void sumPath(Node* root, int k){
+void SumPath(Node* root, int k){
     vector<int> path;
     SumHelper(root, path, k);
 }
@@ -120,20 +120,20 @@ int main(){
     root->right->left = newNode(6);
     root->right->right = newNode(7);
     cout << "Inorder: ";
-    inorder(root);
+    InOrder(root);
     cout << endl;   
     cout << "Preorder: ";
-    preorder(root);
+    PreOrder(root);
     cout << endl;  
     cout << "Postorder: ";
-    postorder(root);
+    PostOrder(root);
     cout << endl;   
     cout << "Levelorder: ";
-    BFS_tree(root);
+    BfsTree(root);
     cout << endl;       
     cout << "Root to leaves path: " << endl;
-    all_root_to_leaves(root);
+    AllRootToLeaves(root);
     cout << "Sum equalling to 11: " << endl;
-    sumPath(root, 11);
+    SumPath(root, 11);
     cout << endl;
 }
