@@ -10,7 +10,7 @@ struct Node{
     int data;
 };
 
-struct Node* newNode(int data){
+struct Node* NewNode(int data){
     Node* node = new Node();
     node->data = data;
     node->left = NULL;
@@ -112,13 +112,13 @@ void SumPath(Node* root, int k){
 }
 
 int main(){
-    struct Node *root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(5);
-    root->right->left = newNode(6);
-    root->right->right = newNode(7);
+    struct Node *root = NewNode(1);
+    root->left = NewNode(2);
+    root->right = NewNode(3);
+    root->left->left = NewNode(4);
+    root->left->right = NewNode(5);
+    root->right->left = NewNode(6);
+    root->right->right = NewNode(7);
     cout << "Inorder: ";
     InOrder(root);
     cout << endl;   
